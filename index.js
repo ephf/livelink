@@ -1,6 +1,6 @@
 const params = new URLSearchParams(location.search);
 new EventSource(
-  `https://api.livelink.cf/stream/${params.get("channel-id")}`
+  `http://api.livelink.cf/stream/${params.get("channel-id")}`
 ).onmessage = ({ data }) => {
   data = JSON.parse(data);
   if (addMessage.lastMessageId == data.id) {
@@ -36,7 +36,7 @@ const continueMessage = (data) => {
 
 input.onchange = () => {
   if (!input.value) return;
-  fetch(`http://localhost/send/${params.get("channel-id")}`, {
+  fetch(`http://api.livelink.cf/send/${params.get("channel-id")}`, {
     method: "POST",
     body: input.value,
   });
